@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Кто хочет стать миллионером</title>
+</head>
+<body>
+<script>
+
+    "use strict";
+
+    const questions = [
+        {
+            text: '\nУзнать его нам просто,\nУзнать его легко,\nВысокого он роста\n' +
+                'И видит далеко.',
+            variants: {
+                'a': 'Жираф',
+                'b': 'Подъемный кран',
+                'c': 'Дядя Степа',
+                'd': 'Бурдж-Халифа',
+            },
+            correctAnswerIndex: 'a',
+        },
+        {
+            text: '\nВ зоопарке,\nВерь, не верь,\nПроживает чудо-зверь,\n' +
+                'У него рука - во лбу,\nТак похожа на трубу!',
+            variants: {
+                'a': 'Чайник',
+                'b': 'Носорог',
+                'c': 'Слон',
+                'd': 'Единорог',
+            },
+            correctAnswerIndex: 'c',
+        },
+        {
+            text: '\nРыжая плутовка,\nХитрая да ловкая,\nВ сарай попала,\nКур пересчитала.',
+            variants: {
+                'a': 'Баба-Яга',
+                'b': 'Лиса',
+                'c': 'Обезьяна',
+                'd': 'Борода',
+            },
+            correctAnswerIndex: 'b',
+        },
+        {
+            text: '\nПо реке плывет бревно,\nОх и злющее оно!\nТем, кто в речку угодил,\nНос откусит...',
+            variants: {
+                'a': 'Водяной',
+                'b': 'Бегемот',
+                'c': 'Крокодил',
+                'd': 'Рыболов',
+            },
+            correctAnswerIndex: 'c',
+        },
+        {
+            text: '\nЗверь я горбатый, а нравлюсь ребятам.',
+            variants: {
+                'a': 'Запорожец',
+                'b': 'Армен Джигарханян',
+                'c': 'Кит',
+                'd': 'Верблюд',
+            },
+            correctAnswerIndex: 'd',
+        },
+    ];
+    /**
+     * @property {questions} questions Массив с объектами вопросов.
+     * @property {int} scoreCount Счетчик правильных ответов.
+     * @property {int} questionIndex Индекс текущего вопроса.
+     */
+    const game = {
+        questions,
+        scoreCount: 0,
+        questionIndex: 0,
+        questionNumber: 1,
+        playerName: prompt("Введите свое имя!"),
+
+        /**
+         * Инициализация игры.
+         */
+        init() {
+            this.scoreCount = 0;
+            this.questionIndex = 0;
+            this.questionNumber = 1;
+            this.playerName = this.playerName[0].toUpperCase() + this.playerName.slice(1);
+        },
+
+        /**
+         * Запуск игры.
+         */
+        run() {
+            this.init();
+            alert(`${this.playerName}, добро пожаловать в игру "Кто хочет стать миллионером"!\n\n\
+Для выхода из игры введите "Q"`);
+            while (true) {
+                const answer = this.getCurrentQuestionString();
+
+                if (this.userWantExit(answer)) {
+                    alert('До свидания!');
+                    break;
+                }
+
+                if (this.isAnswerCorrect(answer)) {
+                    alert("Вы угадали");
+                    this.scoreCount++;
+                } else {
+                    alert("Вы не угадали");
+                }
+
+                this.questionIndex++;
+
+                if (this.isGameOver()) {
+
+                    alert(`Правильных ответов: ${this.scoreCount}.`);
+
+                    if (!confirm("Сыграть еще раз?")) {
+                        break;
+                    }
+
+                    this.init();
+                }
+            }
+        },
+
+        /**
+         * Возвращает строку с текущим вопросом и вариантами ответов.
+         * @returns {string} Строку с текущим вопросом и вариантами ответов.
+         */
+        getCurrentQuestionString() {
+            const question = this.questions[this.questionIndex];
+
+            let variantsAnswer = "";
+
+            for (const key in question.variants) {
+                variantsAnswer += `${key} - ${question.variants[key]}\n`;
+            }
+
+            let userAnswer = prompt(`Вопрос № ${this.questionNumber} (для выхода из игры введите "Q")\n${question.text}
+            \nВарианты ответа:\n${variantsAnswer} \n\n Для выхода из игры введите "Q".`);
+
+            this.questionNumber++;
+
+            return userAnswer;
+        },
+
+        /**
+         * Проверяет ввел ли пользователь вместо ответа информацию для выхода из игры.
+         * @param {string} userAnswer Ответ пользователя.
+         * @returns {boolean} true, если пользователь хотел выйти, false если нет.
+         */
+        userWantExit(userAnswer) {
+            if (userAnswer.toLowerCase() === "q") {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        /**
+         * Проверяет является ли ответ, переданный в функцию верным.
+         * @param {string} userAnswer Ответ пользователя.
+         * @returns {boolean} true, если ответ пользователя верный, false если нет.
+         */
+        isAnswerCorrect(userAnswer) {
+            if (this.questions[this.questionIndex].correctAnswerIndex === userAnswer) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        /**
+         * Проверяет закончилась ли игра.
+         * @returns {boolean} true, если было задано 5 вопросов, иначе false.
+         */
+        isGameOver() {
+            if (this.questionIndex === 5) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+    };
+
+    // Запускаем игру.
+    game.run();
+
+</script>
+</body>
+</html>
