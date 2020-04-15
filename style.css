@@ -1,0 +1,80 @@
+.modal_window {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border: solid 1px #0a0a0a;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.button {
+    width: 120px;
+    height: 40px;
+    background: #6c7781;
+    color: #FFFFFF;
+}
+
+.button:hover {
+    background: #4aa5d8;
+}
+
+.close_button {
+    margin: 40px 40px 0;
+}
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+    margin: 0 auto;
+}
+
+.product {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.productName {
+    font-size: 24px;
+    color: #0000CC;
+}
+
+.product button {
+    display: block;
+    margin-top: 5px;
+    width: 120px;
+    height: 30px;
+    font-size: 18px;
+    background: #6c7781;
+    color: #fff;
+}
+
+.product button:hover {
+    background: #0000CC;
+}
+
+.desc {
+    width: 200px;
+    height: 200px;
+}
+
+.board {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.board tr, td {
+    width: 70px;
+    height: 70px;
+}
+
+.board td {
+    border: solid 1px #0a0a0a;
+    background: #EEEEEE;
+    text-align: center;
+    font-size: 50px;
+}

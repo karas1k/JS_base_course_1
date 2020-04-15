@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chess</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<table id="game" class="board"></table>
+<script>
+
+    'use strict';
+
+    /**
+     *
+     * @property {HTMLElement} board - доска
+     */
+    const chess = {
+        // Получаем элемент с классом board
+        board: document.querySelector('.board'),
+        // Генерируем доску
+        generateBoard() {
+            const rows = ['clear', 1, 2, 3, 4, 5, 6, 7, 8, 'clear'].reverse();
+            const cols = ['clear', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'clear'];
+            // Добавляем строки
+            for (let row = 0; row < rows.length; row++) {
+                const tr = document.createElement('tr');
+                this.board.insertAdjacentElement("beforeend", tr);
+                // Добавляем колонки
+                for (let col = 0; col <cols.length; col++){
+                    const td = document.createElement('td');
+                    tr.insertAdjacentElement("beforeend", td);
+                    // Нумеруем строки буквами
+                    if (rows[row] === 'clear' && cols[col] !== 'clear'){
+                        td.innerText = cols[col];
+                    }
+                    // Нумеруем колонки цифрами
+                    else if (cols[col] === 'clear' && rows[row] !== 'clear'){
+                        td.innerText = rows[row];
+                    }
+                    // Красим клетки
+                    if((row === 0 && col === 0) || (row === 0 && col === 9) || (row === 9 && col === 0) ||
+                        (row === 9 && col === 9)){
+                        td.style.backgroundColor = 'green';
+                    } else if (row === 0 || row === 9 || col === 0 || col === 9){
+                        td.style.backgroundColor = 'orange';
+                    } else if ((row % 2 === 0 && col % 2 !== 0 && row !== 0 && row !== 9) ||
+                        (row % 2 !== 0 && col % 2 === 0 && col !== 0 && col !== 9)) {
+                        td.style.backgroundColor = 'gray';
+                    }
+                    // Размещаем фигуры по своим клеткам
+                        if (row === 2 && col !== 0 && col !== 9) {
+                            td.innerText = '♟';
+                        } else if (row === 7 && col !== 0 && col !== 9 ){
+                            td.innerText = '♙'
+                        } else if ((row === 1 && col === 1) || (row === 1 && col === 8)) {
+                            td.innerText = '♜';
+                        } else if ((row === 1 && col === 2) || (row === 1 && col === 7)) {
+                            td.innerText = '♞';
+                        } else if ((row === 1 && col === 3) || (row === 1 && col === 6)) {
+                            td.innerText = '♝';
+                        } else if ((row === 1 && col === 4)) {
+                            td.innerText = '♛';
+                        } else if ((row === 1 && col === 5)) {
+                            td.innerText = '♚';
+                        } else if ((row === 8 && col === 1) || (row === 8 && col === 8)) {
+                            td.innerText = '♖';
+                        } else if ((row === 8 && col === 2) || (row === 8 && col === 7)) {
+                            td.innerText = '♘';
+                        } else if ((row === 8 && col === 3) || (row === 8 && col === 6)) {
+                            td.innerText = '♗';
+                        } else if ((row === 8 && col === 4)) {
+                            td.innerText = '♕';
+                        } else if ((row === 8 && col === 5)) {
+                            td.innerText = '♔';
+                        }
+                    }
+                }
+            }
+        };
+
+    chess.generateBoard();
+
+</script>
+</body>
+</html>
